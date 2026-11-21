@@ -1,0 +1,111 @@
+✦ NORTHSTAR
+Overview
+Architecture
+Services
+Security
+Evidence
+Hands-on infrastructure & security lab
+Northstar IT Infrastructure & Cybersecurity
+A virtual enterprise lab documenting Windows Server administration, identity and DNS services, endpoint security monitoring, infrastructure observability, and secure remote connectivity.
+
+Explore the Lab
+View Project Evidence
+VMware
+Virtualization platform
+Windows Server 2025
+Domain and DNS services
+Wazuh + Checkmk
+Security and availability monitoring
+Tailscale
+Remote connectivity lab
+Project Overview
+Northstar is a college lab project built to practice the design, deployment, monitoring and troubleshooting of a small enterprise-style Windows environment. The project combines multiple virtual machines and independent monitoring tools.
+
+Infrastructure
+VMware Workstation hosts Windows Server, Windows clients, and Ubuntu-based monitoring systems.
+
+Identity & Networking
+Active Directory Domain Services and DNS support the Northstar.company.local lab domain.
+
+Monitoring
+Wazuh tracks enrolled endpoints, while Checkmk checks host and service health.
+
+Network Architecture
+The virtual machines use VMware's VMnet8 NAT network on the 192.168.30.0/24 subnet. This simplified diagram illustrates the lab's logical grouping, not every individual connection.
+
+VMware Workstation
+VMnet8 · NAT · 192.168.30.0/24
+↓
+Windows Server 2025
+AD DS + DNS · 192.168.30.50
+Windows Clients
+A, B, C, D, Windows 11
+FS01
+192.168.30.80
+↕
+Wazuh
+192.168.30.128
+Checkmk on Ubuntu
+192.168.30.157
+Monitoring dashboards can show powered-off virtual machines as disconnected or down. This is not necessarily a configuration failure.
+
+Core Infrastructure Services
+Active Directory
+Windows Server 2025
+The Northstar domain provides centralized computer and user account management. Domain and computer objects were verified using PowerShell.
+
+Get-ADDomain
+Get-ADComputer -Filter *
+DNS Services
+Internal name resolution
+The lab DNS server resolves internal Northstar names and uses configured external forwarders.
+
+Get-DnsServerZone
+Get-DnsServerForwarder
+nslookup Northstar.company.local 192.168.30.50
+Windows Endpoints
+Managed lab clients
+Windows virtual machines are used for domain membership, connectivity testing, endpoint-agent installation and monitoring validation.
+
+Security & Monitoring
+Wazuh SIEM
+The Wazuh dashboard demonstrates endpoint enrollment and agent status reporting. Some agents appear disconnected when their virtual machines are powered off.
+
+Lab manager: 192.168.30.128
+
+Checkmk
+Checkmk provides centralized host and service monitoring. Windows agent registration and TLS troubleshooting were performed during the lab.
+
+Lab monitor: 192.168.30.157
+
+Tailscale
+Tailscale is used to experiment with secure connectivity between lab devices. A later ping test to FS01 succeeded with four replies and no packet loss.
+
+tailscale status
+tailscale ping <lab-device>
+Verification & Evidence
+The following project checks are supported by lab screenshots. Screenshots can be added here after reviewing them for account names, emails, tokens, and other information that should not be public.
+
+Domain & DNS
+PowerShell output shows the Northstar AD domain, computer records, DNS zones and successful name resolution.
+
+Wazuh Endpoints
+Endpoint dashboard shows enrolled Windows systems and their active or disconnected status at the time captured.
+
+Checkmk Hosts
+Host dashboard shows monitoring coverage and host states. Powered-off machines may report DOWN.
+
+Tailscale Connectivity
+FS01 responded to four ICMP echo requests with zero packet loss in the successful test.
+
+Screenshot Gallery — Coming Next
+Active Directory evidence
+Wazuh dashboard evidence
+Checkmk dashboard evidence
+Tailscale connectivity evidence
+Skills Demonstrated
+Virtualization, IP networking, Windows Server administration, Active Directory, DNS troubleshooting, PowerShell verification, endpoint agent deployment, security monitoring, infrastructure observability and technical documentation.
+
+This website documents an educational lab. Private lab addresses shown here are illustrative of the configured internal network and are not public service endpoints. The dashboards are not embedded or exposed through this website.
+
+© 2026 Northstar IT Infrastructure & Cybersecurity Lab · Educational project documentation
